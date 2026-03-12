@@ -1,0 +1,8 @@
+.env
+.env.bak
+job_hunter_log.json
+tailored_cvs/
+__pycache__/
+*.pyc
+.DS_Store
+*.zip
