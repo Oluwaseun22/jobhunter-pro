@@ -428,7 +428,7 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
 
 if __name__ == '__main__':
-    PORT = 8080
+    PORT = 3000
     print(f"""
 +==========================================+
 |     JobHunter Pro - Dashboard            |

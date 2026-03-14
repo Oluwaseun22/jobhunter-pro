@@ -51,7 +51,7 @@ def scan_reed(title, location="Scotland"):
         return []
     try:
         r = requests.get("https://www.reed.co.uk/api/1.0/search", auth=(key,""),
-            params={"keywords":title,"locationName":location,"resultsToTake":10}, timeout=10)
+            params={"keywords":title,"locationName":location,"resultsToTake":10}, timeout=30)
         jobs = r.json().get("results",[])
         return [{"id":str(j["jobId"]),"title":j["jobTitle"],"company":j["employerName"],
             "location":j.get("locationName",location),
@@ -62,11 +62,48 @@ def scan_reed(title, location="Scotland"):
         print(f"  [ERROR] Reed: {e}")
         return []
 
+
+
+def scan_indeed_via_jsearch(title, location="Scotland, UK"):
+    """Search Indeed jobs via JSearch RapidAPI - free tier 100 calls/day"""
+    print(f"  [SCAN] Searching Indeed/JSearch: {title} in {location}")
+    key = os.getenv("RAPIDAPI_KEY", "")
+    if not key:
+        print("  [SKIP] No RapidAPI key found.")
+        return []
+    try:
+        r = requests.get(
+            "https://jsearch.p.rapidapi.com/search",
+            headers={"X-RapidAPI-Key": key, "X-RapidAPI-Host": "jsearch.p.rapidapi.com"},
+            params={"query": f"{title} in {location}", "page": "1", "num_results": "10", "date_posted": "week"},
+            timeout=30
+        )
+        data = r.json().get("data", [])
+        jobs = []
+        for j in data:
+            jobs.append({
+                "id":          f"indeed_{j.get('job_id', '')}",
+                "title":       j.get("job_title", ""),
+                "company":     j.get("employer_name", ""),
+                "location":    j.get("job_city", location),
+                "salary":      f"£{j.get('job_min_salary','')} - £{j.get('job_max_salary','')}" if j.get("job_min_salary") else "Not specified",
+                "description": j.get("job_description", "")[:1000],
+                "url":         j.get("job_apply_link", ""),
+                "posted":      j.get("job_posted_at_datetime_utc", ""),
+                "source":      "indeed",
+            })
+        print(f"  [SCAN] Indeed returned {len(jobs)} jobs")
+        return jobs
+    except Exception as e:
+        print(f"  [ERROR] JSearch: {e}")
+        return []
+
 def scan_all_platforms():
     all_jobs = []
     for title in JOB_TITLES:
         all_jobs += scan_reed(title, "Scotland")
-        time.sleep(0.3)
+        all_jobs += scan_indeed_via_jsearch(title, "Scotland, UK")
+        time.sleep(0.5)
     seen = set()
     unique = []
     for j in all_jobs:
