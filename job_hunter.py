@@ -22,13 +22,24 @@ CONFIG = {
     "EMAIL_PASS":        os.getenv("EMAIL_PASS", ""),
     "EMAIL_TO":          os.getenv("EMAIL_TO", "seguntoriola25@gmail.com"),
     "SCAN_INTERVAL_MIN": 20,
-    "MIN_MATCH_SCORE":   20,
+    "MIN_MATCH_SCORE":   35,
     "LOCATION":          "Scotland, UK",
     "LOG_FILE":          "job_hunter_log.json",
     "OUTPUT_DIR":        "tailored_cvs",
 }
 
-JOB_TITLES = ["Data Analyst","IT Analyst","Data Engineer","Business Analyst","Operations Analyst","BI Developer","Cloud Engineer"]
+JOB_TITLES = [
+    "Data Analyst",
+    "Junior Data Analyst",
+    "Graduate Data Analyst",
+    "IT Analyst",
+    "IT Support Analyst",
+    "Business Analyst",
+    "Junior Business Analyst",
+    "Operations Analyst",
+    "Data Analyst Trainee",
+    "IT Graduate",
+]
 
 MASTER_CV = {
     "name":    "Oluwasegun Toriola",
@@ -107,8 +118,10 @@ def scan_all_platforms():
     seen = set()
     unique = []
     for j in all_jobs:
-        if j["id"] not in seen:
-            seen.add(j["id"])
+        # Deduplicate by title + company (catches same job from multiple sources)
+        key = f"{j['title'].lower().strip()}_{j['company'].lower().strip()}"
+        if key not in seen:
+            seen.add(key)
             unique.append(j)
     print(f"[SCAN] Found {len(unique)} unique jobs.")
     return unique
@@ -373,6 +386,19 @@ def process_job(job, log):
     save_log(log)
 
 def run_scan():
+    # Reload settings from dashboard on every scan
+    if Path("dashboard_settings.json").exists():
+        try:
+            s = json.load(open("dashboard_settings.json"))
+            if "min_match_score" in s:
+                CONFIG["MIN_MATCH_SCORE"] = s["min_match_score"]
+            if "scan_interval" in s:
+                CONFIG["SCAN_INTERVAL_MIN"] = s["scan_interval"]
+            if "job_titles" in s and s["job_titles"]:
+                global JOB_TITLES
+                JOB_TITLES = s["job_titles"]
+        except: pass
+
     print(f"\n{'='*50}\n[{datetime.datetime.now().strftime('%H:%M:%S')}] Starting scan...\n{'='*50}")
     log = load_log()
     seen_ids = {j["id"] for j in log["seen"]}
