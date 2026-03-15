@@ -1,0 +1,19 @@
+{
+  "email_alerts": false,
+  "auto_scan": false,
+  "scan_interval": 20,
+  "min_match_score": 50,
+  "job_titles": [
+    "Data Analyst",
+    "Junior Data Analyst",
+    "Graduate Data Analyst",
+    "IT Analyst",
+    "IT Support Analyst",
+    "Business Analyst",
+    "Junior Business Analyst",
+    "Operations Analyst",
+    "Data Analyst Trainee",
+    "IT Graduate",
+    "Graduate IT Analyst"
+  ]
+}

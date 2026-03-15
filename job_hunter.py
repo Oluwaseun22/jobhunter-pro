@@ -22,7 +22,7 @@ CONFIG = {
     "EMAIL_PASS":        os.getenv("EMAIL_PASS", ""),
     "EMAIL_TO":          os.getenv("EMAIL_TO", "seguntoriola25@gmail.com"),
     "SCAN_INTERVAL_MIN": 20,
-    "MIN_MATCH_SCORE":   35,
+    "MIN_MATCH_SCORE":   50,
     "LOCATION":          "Scotland, UK",
     "LOG_FILE":          "job_hunter_log.json",
     "OUTPUT_DIR":        "tailored_cvs",
@@ -113,7 +113,10 @@ def scan_all_platforms():
     all_jobs = []
     for title in JOB_TITLES:
         all_jobs += scan_reed(title, "Scotland")
-        all_jobs += scan_indeed_via_jsearch(title, "Scotland, UK")
+        # Only call Indeed every 3rd scan to preserve free API quota
+        import time as _t
+        if int(_t.time() / 3600) % 3 == 0:
+            all_jobs += scan_indeed_via_jsearch(title, "Scotland, UK")
         time.sleep(0.5)
     seen = set()
     unique = []
@@ -125,6 +128,15 @@ def scan_all_platforms():
             unique.append(j)
     print(f"[SCAN] Found {len(unique)} unique jobs.")
     return unique
+
+BLOCKLIST = [
+    "social worker", "recruitment consultant", "sales executive",
+    "transport planner", "phd", "biosciences", "nuclear", "accounts graduate",
+    "audit associate", "procurement", "sport operations", "school executive",
+    "student success", "ethical hacker", "cyber security", "cybersecurity",
+    "software developer", "web developer", "coding", "demonstrator",
+    "settlements analyst", "kyc", "aml", "investment management"
+]
 
 def score_match(job):
     desc = (job.get("description","") + " " + job.get("title","")).lower()
@@ -370,6 +382,11 @@ def save_log(log):
     with open(CONFIG["LOG_FILE"],"w") as f: json.dump(log,f,indent=2)
 
 def process_job(job, log):
+    # Block irrelevant job categories
+    job_text = (job.get("title","") + " " + job.get("description","")).lower()
+    if any(b in job_text for b in BLOCKLIST):
+        print(f"  [BLOCK] {job['title']} @ {job['company']} - irrelevant category")
+        return
     score = score_match(job)
     print(f"  [MATCH] {job['title']} @ {job['company']} -> {score}%")
     if score < CONFIG["MIN_MATCH_SCORE"]:
