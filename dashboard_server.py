@@ -144,6 +144,34 @@ header{background:var(--ink);color:#f7f5f0;padding:20px 40px;display:flex;align-
   font-family:var(--mono);font-size:12px;color:var(--ink);outline:none;resize:vertical;min-height:80px}
 .ma{padding:18px 22px;border-top:1px solid var(--border);display:flex;gap:7px;flex-wrap:wrap}
 footer{text-align:center;padding:28px;font-size:10px;opacity:.3;letter-spacing:1px;text-transform:uppercase}
+
+@media (max-width: 768px) {
+  header{padding:14px 16px}
+  .logo h1{font-size:18px}
+  .main{padding:16px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:14px}
+  .stat-n{font-size:32px}
+  .jh{display:none}
+  .jr{grid-template-columns:1fr;gap:6px;padding:14px 16px}
+  .jr > div:nth-child(3){display:none}
+  .sn{font-size:12px}
+  .score-track{display:none}
+  .ja{flex-wrap:wrap}
+  .ab{font-size:9px;padding:5px 7px}
+  .ctrl{flex-direction:column;align-items:flex-start;gap:10px}
+  .btns{flex-wrap:wrap}
+  .btn{font-size:10px;padding:6px 10px}
+  .sg{grid-template-columns:1fr}
+  .settings-panel{padding:16px}
+  .modal{width:95%;margin:10px}
+  .ma{flex-wrap:wrap}
+}
+@media (max-width: 480px) {
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat-n{font-size:28px}
+  .logo h1{font-size:16px}
+}
 </style>
 </head>
 <body>
