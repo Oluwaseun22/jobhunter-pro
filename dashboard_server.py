@@ -1,7 +1,7 @@
 """
 JobHunter Pro - Dashboard Server
 Run: python3 dashboard_server.py
-Open: http://localhost:4000
+Open: http://0.0.0.0:4000
 """
 import json, os, threading
 from pathlib import Path
@@ -206,7 +206,7 @@ footer{text-align:center;padding:28px;font-size:10px;opacity:.3;letter-spacing:1
     <div id="jl"><div class="empty">Loading...</div></div>
   </div>
 </div>
-<footer>JobHunter Pro · localhost:4000 · Auto-scans every 20 min · github.com/Oluwaseun22/jobhunter-pro</footer>
+<footer>JobHunter Pro · 0.0.0.0:4000 · Auto-scans every 20 min · github.com/Oluwaseun22/jobhunter-pro</footer>
 <div class="mbg" id="modal">
   <div class="modal">
     <div class="mh"><div><div class="mt" id="mt">—</div><div style="font-size:11px;opacity:.5;margin-top:3px" id="mc2">—</div></div><button class="mc" onclick="closeModal()">✕</button></div>
@@ -409,9 +409,9 @@ if __name__=='__main__':
     print(f"""
 +==========================================+
 |   JobHunter Pro - Dashboard v2           |
-|   Open: http://localhost:{PORT}             |
+|   Open: http://0.0.0.0:{PORT}             |
 |   Press Ctrl+C to stop                   |
 +==========================================+
 """)
-    try:HTTPServer(('localhost',PORT),H).serve_forever()
+    try:HTTPServer(('0.0.0.0',PORT),H).serve_forever()
     except KeyboardInterrupt:print("\nStopped.")
