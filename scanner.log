@@ -1,1 +1,57 @@
 nohup: ignoring input
+JobHunter Pro v2 — Monitoring Mode. Ctrl+C to stop.
+
+====================================================
+[16:23:27] Starting scan
+  Threshold: 50% | Roles: 35
+====================================================
+  [SCAN] Reed: Data Analyst in Scotland
+  [SCAN] Reed: Junior Data Analyst in Scotland
+  [SCAN] Reed: Graduate Data Analyst in Scotland
+  [SCAN] Reed: Trainee Data Analyst in Scotland
+  [SCAN] Reed: Data Analyst Trainee in Scotland
+  [SCAN] Reed: BI Analyst in Scotland
+  [SCAN] Reed: Business Intelligence Analyst in Scotland
+  [SCAN] Reed: Analytics Engineer in Scotland
+  [SCAN] Reed: Reporting Analyst in Scotland
+  [SCAN] Reed: Insights Analyst in Scotland
+  [SCAN] Reed: Data Manager in Scotland
+  [SCAN] Reed: Cloud Data Engineer in Scotland
+  [SCAN] Reed: Junior Data Engineer in Scotland
+  [SCAN] Reed: Graduate Data Engineer in Scotland
+  [SCAN] Reed: Cloud Support Engineer in Scotland
+  [SCAN] Reed: Data Engineer in Scotland
+  [SCAN] Reed: AWS Data Engineer in Scotland
+  [SCAN] Reed: Data Infrastructure Engineer in Scotland
+  [SCAN] Reed: IT Analyst in Scotland
+  [SCAN] Reed: IT Support Analyst in Scotland
+  [SCAN] Reed: IT Graduate in Scotland
+  [SCAN] Reed: Service Desk Analyst in Scotland
+  [SCAN] Reed: Systems Analyst in Scotland
+  [SCAN] Reed: IT Operations Analyst in Scotland
+  [SCAN] Reed: Technical Analyst in Scotland
+  [SCAN] Reed: Business Analyst in Scotland
+  [SCAN] Reed: Junior Business Analyst in Scotland
+  [SCAN] Reed: Operations Analyst in Scotland
+  [SCAN] Reed: Process Analyst in Scotland
+  [SCAN] Reed: Digital Analyst in Scotland
+  [SCAN] Reed: Finance Analyst in Scotland
+  [SCAN] Reed: Trainee AI Engineer in Scotland
+  [SCAN] Reed: Junior ML Engineer in Scotland
+  [SCAN] Reed: AI Analyst in Scotland
+  [SCAN] Reed: Machine Learning Engineer in Scotland
+[SCAN] Found 97 unique jobs.
+[SCAN] 86 new jobs to process.
+  [PRE]   Trainee Data Analyst @ ITOL Recruit — prescore 26
+  [EVAL]  Grade B (4.2/5) — APPLY
+  [REPORT] Saved: data/reports/2026-04-10-itol-recruit-trainee-data-analyst.md
+  [TRACKER] Skipped duplicate: Trainee Data Analyst @ ITOL Recruit
+Traceback (most recent call last):
+  File "/home/ubuntu/jobhunter-pro/job_hunter.py", line 673, in <module>
+    run_scan()
+  File "/home/ubuntu/jobhunter-pro/job_hunter.py", line 658, in run_scan
+    process_job(job, log, config)
+  File "/home/ubuntu/jobhunter-pro/job_hunter.py", line 554, in process_job
+    generate_story_bullets(job, evaluation, PROFILE)
+    ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'generate_story_bullets' is not defined

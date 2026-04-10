@@ -190,6 +190,17 @@ def scan_all():
             seen.add(key)
             unique.append(j)
 
+    # Feature 3: Portal scanner — runs every 3rd scan to avoid hammering career pages
+    if int(time.time() / 3600) % 3 == 0:
+        portal_jobs = scan_portals(PROFILE)
+        for j in portal_jobs:
+            key = f"{j['title'].lower().strip()}_{j['company'].lower().strip()}"
+            if key not in seen:
+                seen.add(key)
+                unique.append(j)
+        if portal_jobs:
+            print(f"[SCAN] +{len(portal_jobs)} portal jobs added.")
+
     print(f"[SCAN] Found {len(unique)} unique jobs.")
     return unique
 
@@ -539,6 +550,15 @@ def process_job(job, log, config):
     # 4. Update tracker
     update_tracker(job, evaluation, report_path, PROFILE)
 
+    # Feature 1: Story bank — accumulate STAR+R bullets for B+ jobs
+    generate_story_bullets(job, evaluation, PROFILE)
+
+    # Feature 2: LinkedIn outreach — generate connection request for B+ jobs
+    linkedin_msg = generate_linkedin_outreach(job, evaluation, PROFILE)
+    if linkedin_msg:
+        evaluation["linkedin_outreach"] = linkedin_msg
+        print(f"  [LINKEDIN] Outreach message generated")
+
     # 5. If below threshold, stop here
     min_score = config["MIN_MATCH_SCORE"] / 20  # Convert 0-100 to 0-5
     if overall < min_score or rec == "skip":
@@ -573,22 +593,48 @@ def process_job(job, log, config):
 
     # 9. Save to log
     log["seen"].append({
-        "id":       job["id"],
-        "title":    job["title"],
-        "company":  job["company"],
-        "score":    score_to_percent(overall),
-        "grade":    grade,
-        "pdf":      pdf_path,
-        "url":      job.get("url", ""),
-        "source":   job.get("source", ""),
-        "location": job.get("location", ""),
-        "salary":   job.get("salary", ""),
-        "scanned":  datetime.datetime.now().isoformat(),
-        "report":   report_path,
-        "status":   "evaluated",
-        "one_liner": evaluation.get("one_liner", ""),
+        "id":               job["id"],
+        "title":            job["title"],
+        "company":          job["company"],
+        "score":            score_to_percent(overall),
+        "grade":            grade,
+        "pdf":              pdf_path,
+        "url":              job.get("url", ""),
+        "source":           job.get("source", ""),
+        "location":         job.get("location", ""),
+        "salary":           job.get("salary", ""),
+        "scanned":          datetime.datetime.now().isoformat(),
+        "report":           report_path,
+        "status":           "evaluated",
+        "one_liner":        evaluation.get("one_liner", ""),
+        "linkedin_outreach": evaluation.get("linkedin_outreach", ""),
+        "category":         _classify_role(job["title"]),
     })
     save_log(log)
+
+
+# ── Role Classification ───────────────────────────────────────────────────────
+
+ROLE_CATEGORIES = {
+    "data":    ["data analyst", "bi analyst", "business intelligence", "reporting analyst",
+                "insights analyst", "analytics engineer", "data scientist", "data manager"],
+    "cloud":   ["cloud", "data engineer", "aws", "devops", "infrastructure", "platform engineer"],
+    "it":      ["it analyst", "it support", "service desk", "systems analyst", "it graduate",
+                "it operations", "technical analyst", "helpdesk"],
+    "business":["business analyst", "operations analyst", "process analyst", "digital analyst",
+                "project analyst", "finance analyst", "cost analyst"],
+    "ai":      ["ai engineer", "ml engineer", "machine learning", "artificial intelligence",
+                "llm", "nlp", "trainee ai"],
+}
+
+
+def _classify_role(title):
+    """Classify a job title into one of 5 categories for dashboard filtering."""
+    t = title.lower()
+    for category, keywords in ROLE_CATEGORIES.items():
+        if any(kw in t for kw in keywords):
+            return category
+    return "other"
 
 
 # ── Main Scan Loop ────────────────────────────────────────────────────────────

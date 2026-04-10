@@ -14,34 +14,102 @@
       "Data Analyst",
       "Junior Data Analyst",
       "Graduate Data Analyst",
+      "Trainee Data Analyst",
+      "Data Analyst Trainee",
+      "BI Analyst",
+      "Business Intelligence Analyst",
+      "Analytics Engineer",
+      "Reporting Analyst",
+      "Insights Analyst",
+      "Data Manager",
+      "Cloud Data Engineer",
+      "Junior Data Engineer",
+      "Graduate Data Engineer",
+      "Cloud Support Engineer",
+      "Data Engineer",
+      "AWS Data Engineer",
+      "Data Infrastructure Engineer",
       "IT Analyst",
       "IT Support Analyst",
+      "IT Graduate",
+      "Service Desk Analyst",
+      "Systems Analyst",
+      "IT Operations Analyst",
+      "Technical Analyst",
       "Business Analyst",
       "Junior Business Analyst",
       "Operations Analyst",
-      "Data Analyst Trainee",
-      "IT Graduate",
-      "Cloud Support Analyst",
-      "Data Engineer"
+      "Process Analyst",
+      "Digital Analyst",
+      "Finance Analyst",
+      "Trainee AI Engineer",
+      "Junior ML Engineer",
+      "AI Analyst",
+      "Machine Learning Engineer"
     ],
-    "locations": ["Scotland", "UK"],
+    "locations": [
+      "Scotland",
+      "UK"
+    ],
     "salary_min": 25000,
     "salary_target": 35000,
     "min_match_score": 50,
     "scan_interval_min": 20,
     "require_sponsorship": false
   },
-  "summary": "Data and IT professional with MSc Information Technology (University of the West of Scotland, 2026) and hands-on experience in data analysis, cloud infrastructure, and automation. Skilled in SQL, Python, Power BI, and AWS. AWS Certified Solutions Architect – Associate (2025).",
+  "summary": "Data and IT professional with MSc Information Technology (University of the West of Scotland, 2026) and hands-on experience in data analysis, cloud infrastructure, and automation. Skilled in SQL, Python, Power BI, and AWS. AWS Certified Solutions Architect \u2013 Associate (2025).",
   "skills": {
-    "data": ["SQL", "Power BI", "Python", "Excel", "Data Analysis", "Reporting", "Dashboards", "ETL"],
-    "cloud": ["AWS EC2", "AWS S3", "AWS Lambda", "AWS RDS", "AWS DynamoDB", "AWS CloudFront", "AWS IAM", "AWS VPC", "AWS Secrets Manager", "AWS EventBridge", "AWS SES", "Elastic Beanstalk"],
-    "development": ["Python", "JavaScript", "React", "Node.js", "HTML", "CSS", "Git", "REST APIs"],
-    "databases": ["MySQL", "Firebase Firestore", "DynamoDB", "SQL"],
-    "tools": ["Power BI", "Excel", "GitHub", "VS Code", "Linux"]
+    "data": [
+      "SQL",
+      "Power BI",
+      "Python",
+      "Excel",
+      "Data Analysis",
+      "Reporting",
+      "Dashboards",
+      "ETL"
+    ],
+    "cloud": [
+      "AWS EC2",
+      "AWS S3",
+      "AWS Lambda",
+      "AWS RDS",
+      "AWS DynamoDB",
+      "AWS CloudFront",
+      "AWS IAM",
+      "AWS VPC",
+      "AWS Secrets Manager",
+      "AWS EventBridge",
+      "AWS SES",
+      "Elastic Beanstalk"
+    ],
+    "development": [
+      "Python",
+      "JavaScript",
+      "React",
+      "Node.js",
+      "HTML",
+      "CSS",
+      "Git",
+      "REST APIs"
+    ],
+    "databases": [
+      "MySQL",
+      "Firebase Firestore",
+      "DynamoDB",
+      "SQL"
+    ],
+    "tools": [
+      "Power BI",
+      "Excel",
+      "GitHub",
+      "VS Code",
+      "Linux"
+    ]
   },
   "certifications": [
     {
-      "name": "AWS Certified Solutions Architect – Associate",
+      "name": "AWS Certified Solutions Architect \u2013 Associate",
       "issuer": "Amazon Web Services",
       "date": "2025",
       "valid_until": "2029",
@@ -53,7 +121,7 @@
       "title": "Data and Operations Specialist",
       "company": "OS Toriola Steel Construction Company",
       "location": "Nigeria",
-      "dates": "Nov 2022 – Jan 2025",
+      "dates": "Nov 2022 \u2013 Jan 2025",
       "bullets": [
         "Analysed operational and production data across departments, identifying trends and performance inefficiencies to support management decisions",
         "Built Excel dashboards tracking KPIs across construction projects, reducing manual reporting time by 30%",
@@ -65,7 +133,7 @@
       "title": "Cleaning Operative",
       "company": "DOC Cleaning",
       "location": "Paisley, Scotland",
-      "dates": "2025 – Present",
+      "dates": "2025 \u2013 Present",
       "bullets": [
         "Maintained operational standards across client sites while pursuing MSc and AWS certification full-time"
       ]
@@ -73,30 +141,30 @@
   ],
   "projects": [
     {
-      "name": "ENGMart – Cloud Retail and Inventory System",
+      "name": "ENGMart \u2013 Cloud Retail and Inventory System",
       "description": "MSc dissertation project. Three-tier cloud retail and inventory management platform deployed on AWS. React frontend served from S3/CloudFront, Node.js/Express backend on Elastic Beanstalk, MySQL 8.4 on RDS. Supports multi-role access (admin, staff), stock tracking, and sales reporting.",
-      "tech": "React · Node.js · MySQL · AWS (EC2, S3, RDS, CloudFront, Elastic Beanstalk) · Three-tier architecture",
+      "tech": "React \u00b7 Node.js \u00b7 MySQL \u00b7 AWS (EC2, S3, RDS, CloudFront, Elastic Beanstalk) \u00b7 Three-tier architecture",
       "url": "github.com/Oluwaseun22/engmart",
       "status": "deployed"
     },
     {
       "name": "NHS Sponsorship Tracker",
       "description": "Fully serverless AWS pipeline that scrapes NHS Jobs XML API every 6 hours via EventBridge and Lambda, filters for visa-sponsorship roles using two-stage keyword matching, deduplicates results in DynamoDB, stores data in S3, and sends email alerts via SES. Live CloudFront dashboard.",
-      "tech": "Python · AWS Lambda · EventBridge · DynamoDB · S3 · SES · CloudFront · IAM",
+      "tech": "Python \u00b7 AWS Lambda \u00b7 EventBridge \u00b7 DynamoDB \u00b7 S3 \u00b7 SES \u00b7 CloudFront \u00b7 IAM",
       "url": "github.com/Oluwaseun22/nhs-sponsorship-tracker",
       "status": "deployed"
     },
     {
-      "name": "JobHunter Pro – Automated Job Application System",
+      "name": "JobHunter Pro \u2013 Automated Job Application System",
       "description": "24/7 automated job hunting pipeline deployed on AWS EC2. Scans Reed.co.uk and Indeed every 20 minutes, scores jobs via keyword matching, tailors CVs per role using Claude API, generates PDF output, and sends email alerts. Live dashboard with filtering, settings, and re-tailor functionality.",
-      "tech": "Python · Claude API · Reed API · JSearch RapidAPI · ReportLab · AWS EC2 · Secrets Manager",
+      "tech": "Python \u00b7 Claude API \u00b7 Reed API \u00b7 JSearch RapidAPI \u00b7 ReportLab \u00b7 AWS EC2 \u00b7 Secrets Manager",
       "url": "github.com/Oluwaseun22/jobhunter-pro",
       "status": "deployed"
     },
     {
-      "name": "SponsorMap – UK Visa Sponsor Search Tool",
+      "name": "SponsorMap \u2013 UK Visa Sponsor Search Tool",
       "description": "Tool for international candidates to find UK employers on the Home Office sponsor register. Combines Companies House API data with Home Office CSV exports, served via React frontend on GitHub Pages with serverless Lambda backend.",
-      "tech": "React · AWS Lambda · API Gateway · DynamoDB · Companies House API · GitHub Pages",
+      "tech": "React \u00b7 AWS Lambda \u00b7 API Gateway \u00b7 DynamoDB \u00b7 Companies House API \u00b7 GitHub Pages",
       "url": "engtx.co.uk/sponsormap",
       "status": "in-progress"
     }
@@ -106,31 +174,95 @@
       "degree": "MSc Information Technology",
       "school": "University of the West of Scotland",
       "location": "Paisley, Scotland",
-      "dates": "2024 – Jun 2026",
-      "notes": "Dissertation: ENGMart – Cloud Retail and Inventory System. Supervisor: Zeeshan Ahmad."
+      "dates": "2024 \u2013 Jun 2026",
+      "notes": "Dissertation: ENGMart \u2013 Cloud Retail and Inventory System. Supervisor: Zeeshan Ahmad."
     },
     {
       "degree": "HND Mechanical Engineering",
       "school": "Lagos State Polytechnic",
       "location": "Lagos, Nigeria",
-      "dates": "2014 – 2021"
+      "dates": "2014 \u2013 2021"
     }
   ],
   "blocklist": [
-    "social worker", "recruitment consultant", "sales executive",
-    "transport planner", "phd", "biosciences", "nuclear",
-    "accounts graduate", "audit associate", "procurement",
-    "sport operations", "school executive", "student success",
-    "ethical hacker", "cyber security", "cybersecurity",
-    "software developer", "web developer", "demonstrator",
-    "settlements analyst", "kyc", "aml", "investment management",
-    "coding bootcamp", "teaching assistant"
+    "social worker",
+    "recruitment consultant",
+    "sales executive",
+    "transport planner",
+    "phd",
+    "biosciences",
+    "nuclear",
+    "accounts graduate",
+    "audit associate",
+    "procurement",
+    "sport operations",
+    "school executive",
+    "student success",
+    "ethical hacker",
+    "cyber security",
+    "cybersecurity",
+    "software developer",
+    "web developer",
+    "demonstrator",
+    "settlements analyst",
+    "kyc",
+    "aml",
+    "investment management",
+    "coding bootcamp",
+    "teaching assistant"
   ],
   "scoring_weights": {
-    "role_fit": 0.30,
-    "skills_match": 0.30,
-    "location": 0.20,
-    "growth": 0.10,
-    "compensation": 0.10
+    "role_fit": 0.3,
+    "skills_match": 0.3,
+    "location": 0.2,
+    "growth": 0.1,
+    "compensation": 0.1
+  },
+  "role_categories": {
+    "data": [
+      "Data Analyst",
+      "Junior Data Analyst",
+      "Graduate Data Analyst",
+      "Trainee Data Analyst",
+      "Data Analyst Trainee",
+      "BI Analyst",
+      "Business Intelligence Analyst",
+      "Analytics Engineer",
+      "Reporting Analyst",
+      "Insights Analyst",
+      "Data Manager"
+    ],
+    "cloud": [
+      "Cloud Data Engineer",
+      "Junior Data Engineer",
+      "Graduate Data Engineer",
+      "Cloud Support Engineer",
+      "Data Engineer",
+      "AWS Data Engineer",
+      "Data Infrastructure Engineer"
+    ],
+    "it": [
+      "IT Analyst",
+      "IT Support Analyst",
+      "IT Graduate",
+      "Service Desk Analyst",
+      "Systems Analyst",
+      "IT Operations Analyst",
+      "Technical Analyst"
+    ],
+    "business": [
+      "Business Analyst",
+      "Junior Business Analyst",
+      "Operations Analyst",
+      "Process Analyst",
+      "Digital Analyst",
+      "Finance Analyst"
+    ],
+    "ai": [
+      "Trainee AI Engineer",
+      "Junior ML Engineer",
+      "AI Analyst",
+      "Machine Learning Engineer"
+    ]
   }
 }

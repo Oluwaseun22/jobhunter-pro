@@ -17,6 +17,7 @@ CV_DIR        = "tailored_cvs"
 SETTINGS_FILE = "dashboard_settings.json"
 REPORTS_DIR   = "data/reports"
 TRACKER_FILE  = "data/applications.md"
+STORY_BANK_FILE = "data/story_bank.md"
 
 
 def get_dashboard_token():
@@ -111,12 +112,78 @@ def load_report(filename):
     return None
 
 
+def load_stories():
+    """
+    Parse data/story_bank.md into structured story objects for the dashboard.
+    AUDIT: Read-only, no user input processed here.
+    """
+    if not Path(STORY_BANK_FILE).exists():
+        return []
+
+    stories = []
+    current_job = ""
+    current_date = ""
+    current_q = ""
+    current_star = ""
+    current_kw = []
+
+    with open(STORY_BANK_FILE) as f:
+        for line in f:
+            line = line.rstrip()
+            if line.startswith("## ") and " — " in line:
+                # Save previous story if exists
+                if current_q and current_star:
+                    stories.append({
+                        "question": current_q,
+                        "star":     current_star,
+                        "keywords": current_kw,
+                        "job":      current_job,
+                        "date":     current_date,
+                    })
+                parts = line[3:].split(" — ")
+                current_job = parts[0].strip()
+                current_date = parts[1].strip() if len(parts) > 1 else ""
+                current_q = current_star = ""
+                current_kw = []
+            elif line.startswith("**Q: ") and line.endswith("**"):
+                if current_q and current_star:
+                    stories.append({
+                        "question": current_q,
+                        "star":     current_star,
+                        "keywords": current_kw,
+                        "job":      current_job,
+                        "date":     current_date,
+                    })
+                current_q = line[5:-2].strip()
+                current_star = ""
+                current_kw = []
+            elif line.startswith("*Keywords:"):
+                kw_str = line.strip("*").replace("Keywords:", "").strip()
+                current_kw = [k.strip() for k in kw_str.split(",")]
+            elif line and not line.startswith("#") and not line.startswith("---") and current_q:
+                current_star = (current_star + " " + line).strip()
+
+    # Save last story
+    if current_q and current_star:
+        stories.append({
+            "question": current_q,
+            "star":     current_star,
+            "keywords": current_kw,
+            "job":      current_job,
+            "date":     current_date,
+        })
+
+    return stories
+
+
 HTML = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JobHunter Pro v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,700;0,900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -126,6 +193,20 @@ HTML = r"""<!DOCTYPE html>
   --mono:'DM Mono',monospace;--serif:'Fraunces',serif
 }
 body{background:var(--paper);color:var(--ink);font-family:var(--mono);min-height:100vh}
+
+/* AUDIT FIX [5.5]: Disable animations for users who prefer reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+/* AUDIT FIX [5.2]: Focus-visible styles for keyboard navigation */
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+button:focus-visible,a:focus-visible,.tab:focus-visible,.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+/* AUDIT FIX [3.2]: Minimum 44px touch targets on mobile */
+@media(max-width:768px){
+  .ab{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+  .btn{min-height:44px}
+  .tab{min-height:44px}
+}
 
 /* Header */
 header{background:var(--ink);color:#f7f5f0;padding:20px 40px;display:flex;align-items:center;justify-content:space-between}
@@ -243,6 +324,33 @@ header{background:var(--ink);color:#f7f5f0;padding:20px 40px;display:flex;align-
 .tracker-wrap{background:var(--paper);border:1px solid var(--border);padding:0}
 .tracker-content{font-size:11px;line-height:1.8;padding:24px;overflow-x:auto;white-space:pre-wrap;font-family:var(--mono)}
 
+/* Story bank tab */
+.story-list{display:grid;gap:12px}
+.story-card{background:var(--paper);border:1px solid var(--border);padding:20px}
+.story-q{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.5;margin-bottom:8px}
+.story-body{font-size:13px;line-height:1.7;margin-bottom:8px}
+.story-kw{font-size:10px;opacity:.4;font-style:italic}
+.story-job{font-size:10px;opacity:.3;margin-top:8px;letter-spacing:1px;text-transform:uppercase}
+
+/* LinkedIn outreach in modal */
+.outreach-box{background:var(--warm);border:1px solid var(--border);padding:12px;margin-bottom:14px;
+  font-size:12px;line-height:1.6;position:relative}
+.outreach-copy{position:absolute;top:8px;right:8px;background:none;border:1px solid var(--border);
+  font-family:var(--mono);font-size:9px;padding:3px 7px;cursor:pointer;letter-spacing:1px}
+.outreach-copy:hover{background:var(--ink);color:#f7f5f0}
+
+/* Category filter pills */
+.cat-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.cat-btn{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  padding:5px 11px;border:1px solid var(--border);background:transparent;cursor:pointer;
+  border-radius:100px;transition:all .15s;color:var(--ink)}
+.cat-btn:hover,.cat-btn.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cat-btn.data{border-color:#1e3a8a;color:#1e3a8a}.cat-btn.data.active{background:#1e3a8a;color:white}
+.cat-btn.cloud{border-color:#1a5c38;color:#1a5c38}.cat-btn.cloud.active{background:#1a5c38;color:white}
+.cat-btn.it{border-color:#b7791f;color:#b7791f}.cat-btn.it.active{background:#b7791f;color:white}
+.cat-btn.business{border-color:#5b21b6;color:#5b21b6}.cat-btn.business.active{background:#5b21b6;color:white}
+.cat-btn.ai{border-color:#c0392b;color:#c0392b}.cat-btn.ai.active{background:#c0392b;color:white}
+
 /* Report viewer */
 .report-list{border:1px solid var(--border)}
 .report-item{display:flex;align-items:center;justify-content:space-between;
@@ -297,7 +405,7 @@ footer{text-align:center;padding:28px;font-size:10px;opacity:.3;letter-spacing:1
   </div>
 </header>
 
-<div class="main">
+<main class="main" id="main-content" aria-label="Job Hunter Dashboard">
   <div class="notif" id="notif">
     <span id="notif-text"></span>
     <button onclick="document.getElementById('notif').classList.remove('show')"
@@ -353,24 +461,35 @@ footer{text-align:center;padding:28px;font-size:10px;opacity:.3;letter-spacing:1
   </div>
 
   <!-- Tabs -->
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('jobs',this)">Job Feed</button>
-    <button class="tab" onclick="switchTab('tracker',this)">Tracker</button>
-    <button class="tab" onclick="switchTab('reports',this)">Reports</button>
+  <div class="tabs" role="tablist" aria-label="Dashboard sections">
+    <button class="tab active" role="tab" aria-selected="true" onclick="switchTab('jobs',this)">Job Feed</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="switchTab('tracker',this)">Tracker</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="switchTab('reports',this)">Reports</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="switchTab('stories',this)">Story Bank</button>
   </div>
 
   <!-- Tab: Jobs -->
-  <div class="tabpanel active" id="tab-jobs">
+  <div class="tabpanel active" id="tab-jobs" role="tabpanel">
     <div class="ctrl">
       <h2>Live Job Feed</h2>
       <div class="btns">
-        <button class="btn active" onclick="filter('all',this)">All</button>
-        <button class="btn" onclick="filter('ab',this)">Grade A/B</button>
-        <button class="btn" onclick="filter('applied',this)">Applied</button>
-        <button class="btn" onclick="filter('reed',this)">Reed</button>
-        <button class="btn" onclick="filter('indeed',this)">Indeed</button>
-        <button class="btn pri" onclick="scan()">↻ Scan Now</button>
+        <button class="btn active" onclick="filter('all',this)" aria-pressed="true">All</button>
+        <button class="btn" onclick="filter('ab',this)" aria-pressed="false">Grade A/B</button>
+        <button class="btn" onclick="filter('applied',this)" aria-pressed="false">Applied</button>
+        <button class="btn" onclick="filter('reed',this)" aria-pressed="false">Reed</button>
+        <button class="btn" onclick="filter('indeed',this)" aria-pressed="false">Indeed</button>
+        <button class="btn" onclick="filter('portal',this)" aria-pressed="false">Portals</button>
+        <button class="btn pri" onclick="scan()" aria-label="Trigger new scan">↻ Scan Now</button>
       </div>
+    </div>
+    <!-- Category filters — AUDIT: role=group for screen readers -->
+    <div class="cat-filters" role="group" aria-label="Filter by role category">
+      <button class="cat-btn active" onclick="filterCat('all',this)">All Categories</button>
+      <button class="cat-btn data" onclick="filterCat('data',this)">Data & Analytics</button>
+      <button class="cat-btn cloud" onclick="filterCat('cloud',this)">Cloud & Engineering</button>
+      <button class="cat-btn it" onclick="filterCat('it',this)">IT & Support</button>
+      <button class="cat-btn business" onclick="filterCat('business',this)">Business</button>
+      <button class="cat-btn ai" onclick="filterCat('ai',this)">AI & ML</button>
     </div>
     <div class="sbar" id="sb"><span class="spin">⟳</span><span id="sm">Scanning...</span></div>
     <div class="rbar" id="rb">
@@ -387,8 +506,24 @@ footer{text-align:center;padding:28px;font-size:10px;opacity:.3;letter-spacing:1
     </div>
   </div>
 
+  <!-- Tab: Story Bank -->
+  <div class="tabpanel" id="tab-stories" role="tabpanel">
+    <div class="ctrl">
+      <h2>Interview Story Bank</h2>
+      <div class="btns">
+        <button class="btn pri" onclick="loadStories()" aria-label="Refresh story bank">↻ Refresh</button>
+      </div>
+    </div>
+    <p style="font-size:11px;opacity:.5;margin-bottom:16px">
+      STAR+R stories accumulated from Grade A/B evaluations. Use these to prep for behavioural interviews.
+    </p>
+    <div id="story-list" class="story-list">
+      <div class="empty">Loading stories...</div>
+    </div>
+  </div>
+
   <!-- Tab: Tracker -->
-  <div class="tabpanel" id="tab-tracker">
+  <div class="tabpanel" id="tab-tracker" role="tabpanel">
     <div class="ctrl">
       <h2>Application Tracker</h2>
       <div class="btns">
@@ -401,7 +536,7 @@ footer{text-align:center;padding:28px;font-size:10px;opacity:.3;letter-spacing:1
   </div>
 
   <!-- Tab: Reports -->
-  <div class="tabpanel" id="tab-reports">
+  <div class="tabpanel" id="tab-reports" role="tabpanel">
     <div class="ctrl">
       <h2>Evaluation Reports</h2>
       <div class="btns">
@@ -427,6 +562,15 @@ footer{text-align:center;padding:28px;font-size:10px;opacity:.3;letter-spacing:1
     </div>
     <div class="mb">
       <div class="one-liner" id="m-oneliner" style="display:none"></div>
+      <!-- LinkedIn outreach — only shown for B+ jobs -->
+      <div id="m-outreach" style="display:none">
+        <div class="ml" style="font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.5;margin-bottom:4px">
+          LinkedIn Outreach
+        </div>
+        <div class="outreach-box" id="m-outreach-text">
+          <button class="outreach-copy" onclick="copyOutreach()" aria-label="Copy outreach message">Copy</button>
+        </div>
+      </div>
       <div style="display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap">
         <div class="mf" style="flex:1">
           <div class="ml">Grade</div>
@@ -473,11 +617,13 @@ footer{text-align:center;padding:28px;font-size:10px;opacity:.3;letter-spacing:1
   </div>
 </div>
 
+</main>
 <footer>JobHunter Pro v2 · 0.0.0.0:4000 · github.com/Oluwaseun22/jobhunter-pro</footer>
 
 <script>
 let jobs = [], settings = {}, cur = -1;
 
+// Extract token from URL once — sent as header on every API request
 const TOKEN = new URLSearchParams(window.location.search).get('token') || '';
 function apiFetch(url, opts) {
   opts = opts || {};
@@ -539,23 +685,44 @@ function renderJobs(list) {
       <div class="ja" onclick="event.stopPropagation()">
         <a class="ab ap" href="${j.url || '#'}" target="_blank" onclick="qApply(${idx})">Apply</a>
         ${j.pdf ? `<a class="ab" href="/cv/${encodeURIComponent(j.pdf.split('/').pop())}" target="_blank">CV</a>` : ''}
-        <button class="ab rt" onclick="qRetailor(${idx})">✨</button>
-        <button class="ab hd" onclick="qHide(${idx})">✕</button>
+        <button class="ab rt" onclick="qRetailor(${idx})" aria-label="Re-tailor CV">✨</button>
+        <button class="ab hd" onclick="qHide(${idx})" aria-label="Hide job">✕</button>
       </div>
     </div>`;
   }).join('');
 }
 
 // ── Filters ───────────────────────────────────────────────────
+let activeCat = 'all'; // track active category filter
+
 function filter(t, btn) {
-  document.querySelectorAll('.btns .btn:not(.pri)').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.btns .btn:not(.pri)').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
+  });
   btn.classList.add('active');
+  btn.setAttribute('aria-pressed', 'true');
   let f = jobs.filter(j => !j.hidden);
   if (t === 'ab')      f = f.filter(j => j.grade === 'A' || j.grade === 'B');
   if (t === 'applied') f = f.filter(j => j.applied || j.status === 'applied');
   if (t === 'reed')    f = f.filter(j => j.source === 'reed');
   if (t === 'indeed')  f = f.filter(j => j.source === 'indeed');
+  if (t === 'portal')  f = f.filter(j => j.source === 'portal');
+  // Apply active category filter on top
+  if (activeCat !== 'all') f = f.filter(j => j.category === activeCat);
   renderJobs(f);
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = cat;
+  // Re-apply current source filter on top of category
+  let f = jobs.filter(j => !j.hidden);
+  if (cat !== 'all') f = f.filter(j => j.category === cat);
+  renderJobs(f);
+  // Update count label
+  notify(cat === 'all' ? `Showing all ${f.length} jobs` : `${cat.toUpperCase()}: ${f.length} jobs`);
 }
 
 // ── Modal ─────────────────────────────────────────────────────
@@ -578,9 +745,40 @@ function showModal(i) {
   if (j.one_liner) { ol.textContent = j.one_liner; ol.style.display = 'block'; }
   else { ol.style.display = 'none'; }
 
+  // LinkedIn outreach — show only if available
+  const outreachWrap = document.getElementById('m-outreach');
+  const outreachText = document.getElementById('m-outreach-text');
+  if (j.linkedin_outreach) {
+    outreachText.childNodes[0]
+      ? outreachText.firstChild.textContent !== undefined
+        ? null
+        : null
+      : null;
+    // Set text safely — no innerHTML to prevent XSS
+    const copy = outreachText.querySelector('.outreach-copy');
+    outreachText.textContent = j.linkedin_outreach;
+    outreachText.appendChild(copy);
+    outreachWrap.style.display = 'block';
+  } else {
+    outreachWrap.style.display = 'none';
+  }
+
   document.getElementById('modal').classList.add('open');
 }
 function closeModal() { document.getElementById('modal').classList.remove('open'); }
+function copyOutreach() {
+  const txt = document.getElementById('m-outreach-text').textContent.replace('Copy','').trim();
+  navigator.clipboard.writeText(txt).then(() => notify('📋 Outreach copied!')).catch(() => {
+    // Fallback for browsers without clipboard API
+    const ta = document.createElement('textarea');
+    ta.value = txt;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    notify('📋 Outreach copied!');
+  });
+}
 function openCV() {
   const p = document.getElementById('mcv').dataset.pdf;
   if (p) window.open('/cv/' + encodeURIComponent(p.split('/').pop()), '_blank');
@@ -645,12 +843,50 @@ async function scan() {
 
 // ── Tabs ──────────────────────────────────────────────────────
 function switchTab(name, btn) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
   document.querySelectorAll('.tabpanel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
   document.getElementById('tab-' + name).classList.add('active');
   if (name === 'tracker') loadTracker();
   if (name === 'reports') loadReports();
+  if (name === 'stories') loadStories();
+}
+
+async function loadStories() {
+  try {
+    const r = await apiFetch('/api/stories');
+    const d = await r.json();
+    const el = document.getElementById('story-list');
+    if (!d.stories || !d.stories.length) {
+      el.innerHTML = '<div class="empty">No stories yet. Stories accumulate from Grade A/B evaluations.</div>';
+      return;
+    }
+    el.innerHTML = d.stories.map(s => `
+      <div class="story-card" role="article">
+        <div class="story-q">${escHtml(s.question)}</div>
+        <div class="story-body">${escHtml(s.star)}</div>
+        ${s.keywords && s.keywords.length ? `<div class="story-kw">Keywords: ${escHtml(s.keywords.join(', '))}</div>` : ''}
+        <div class="story-job">${escHtml(s.job)} — ${escHtml(s.date)}</div>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('story-list').innerHTML = '<div class="empty">Could not load story bank.</div>';
+  }
+}
+
+// AUDIT FIX [6.3]: Escape HTML for all user-content rendered in DOM to prevent XSS
+function escHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 async function loadTracker() {
@@ -897,6 +1133,9 @@ class Handler(BaseHTTPRequestHandler):
             else:
                 files = []
             self.send_json({"reports": files})
+
+        elif path == "/api/stories":
+            self.send_json({"stories": load_stories()})
 
         elif path.startswith("/api/report/"):
             # AUDIT FIX [6.B]: Strip to filename only — prevents directory traversal

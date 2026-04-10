@@ -1,17 +1,17 @@
 # Trainee Data Analyst — ITOL Recruit
 
 **Date:** 2026-04-10
-**Grade:** A  |  **Score:** 4.6/5  |  **Recommendation:** APPLY
-**URL:** https://www.reed.co.uk/jobs/trainee-data-analyst/56665537
+**Grade:** B  |  **Score:** 4.4/5  |  **Recommendation:** APPLY
+**URL:** https://www.reed.co.uk/jobs/trainee-data-analyst/56760843
 **Salary:** £30000.0 - £50000.0
-**Location:** EH88BG
+**Location:** AB115BU
 **Source:** REED
 
 ---
 
 ## Evaluation Summary
 
-Perfect role match with excellent salary range and structured training program for career progression.
+Perfect role match with strong salary range, ideal entry point for data analysis career.
 
 ---
 
@@ -20,32 +20,32 @@ Perfect role match with excellent salary range and structured training program f
 | Dimension | Score | Weight |
 |-----------|-------|--------|
 | Role Fit | 5/5 | 30% |
-| Skills Match | 4/5 | 30% |
-| Location | 5/5 | 20% |
+| Skills Match | 5/5 | 30% |
+| Location | 3/5 | 20% |
 | Growth | 4/5 | 10% |
-| Compensation | 5/5 | 10% |
-| **Weighted Total** | **4.6/5** | |
+| Compensation | 4/5 | 10% |
+| **Weighted Total** | **4.4/5** | |
 
 ---
 
 ## Matched Keywords
 
-Data Analyst, Data Analysis, SQL, Python, Power BI, analytical, detail orientated
+Data Analyst, Trainee, analytical, data analysis, detail orientated, organised
 
 ---
 
 ## Gaps
 
-- specific industry experience
-- statistical analysis
+- Location specificity unclear
+- Program structure undefined
 
 ---
 
 ## Tailored CV Bullets
 
-- Developed data analysis solutions using SQL, Python, and Power BI to optimize operations and reporting processes
-- Leveraged AWS cloud infrastructure (EC2, S3, RDS) to build scalable data pipelines and analytics workflows
-- Applied analytical and problem-solving skills to extract insights from complex datasets while maintaining high attention to detail
+- Delivered comprehensive data analysis and reporting solutions using SQL, Python, and Power BI in operations specialist role
+- Developed analytical frameworks and dashboard solutions combining technical expertise with detail-oriented approach to data insights
+- Applied systematic data analysis methodologies while maintaining organised approach to complex technical projects and stakeholder communication
 
 ---
 
