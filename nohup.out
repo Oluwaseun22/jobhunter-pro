@@ -1,0 +1,426 @@
+
+==================================================
+[20:13:51] Starting scan...
+==================================================
+  [SCAN] Searching Reed: Data Analyst in Scotland
+  [SCAN] Searching Reed: Junior Data Analyst in Scotland
+  [SCAN] Searching Reed: Graduate Data Analyst in Scotland
+  [SCAN] Searching Reed: IT Analyst in Scotland
+  [SCAN] Searching Reed: IT Support Analyst in Scotland
+  [SCAN] Searching Reed: Business Analyst in Scotland
+  [SCAN] Searching Reed: Junior Business Analyst in Scotland
+  [SCAN] Searching Reed: Operations Analyst in Scotland
+  [SCAN] Searching Reed: Data Analyst Trainee in Scotland
+  [SCAN] Searching Reed: IT Graduate in Scotland
+  [SCAN] Searching Reed: Graduate IT Analyst in Scotland
+[SCAN] Found 40 unique jobs.
+[SCAN] 39 new jobs to process.
+  [MATCH] Change Analyst @ Business Stream -> 15%
+  [SKIP]  Below threshold
+  [MATCH] Retail Operations Analyst @ Compass Group UK & Ireland Ltd -> 30%
+  [SKIP]  Below threshold
+  [MATCH] Senior Insight Analyst @ Virgin Money -> 22%
+  [SKIP]  Below threshold
+  [MATCH] Data Management Associate Manager @ Accenture -> 30%
+  [SKIP]  Below threshold
+  [MATCH] Data Analyst Trainee @ ITOL Recruit -> 22%
+  [SKIP]  Below threshold
+  [MATCH] Trainee Data Analyst @ ITOL Recruit -> 22%
+  [SKIP]  Below threshold
+  [MATCH] Trainee Data Analyst @ Newto Training -> 30%
+  [SKIP]  Below threshold
+  [BLOCK] Trainee Software Developer @ ITOL Recruit - irrelevant category
+  [BLOCK] Software Developer Trainee @ ITOL Recruit - irrelevant category
+  [BLOCK] Coding and Programming Trainee @ ITOL Recruit - irrelevant category
+  [MATCH] IT Service Desk Apprentice @ QA -> 7%
+  [SKIP]  Below threshold
+  [MATCH] IT Support Analyst @ Quorum Network Resources -> 22%
+  [SKIP]  Below threshold
+  [MATCH] IT Support Analyst @ Robert Half -> 15%
+  [SKIP]  Below threshold
+  [MATCH] IT Service Transition Analyst @ Pontoon -> 15%
+  [SKIP]  Below threshold
+  [MATCH] Italian Speaking IT Helpdesk Analyst @ Harvey Nash -> 22%
+  [SKIP]  Below threshold
+  [MATCH] Gas Distribution Planning Analyst (Network Analyst) @ SGN -> 15%
+  [SKIP]  Below threshold
+  [MATCH] Service Desk Engineer - Glasgow @ Accenture -> 30%
+  [SKIP]  Below threshold
+  [MATCH] Vulnerability Management Specialist @ Virgin Money -> 22%
+  [SKIP]  Below threshold
+  [MATCH] 1st Line Support Analyst @ IMT Resourcing Solutions -> 15%
+  [SKIP]  Below threshold
+  [MATCH] Business Analyst @ Harvey Nash -> 22%
+  [SKIP]  Below threshold
+  [MATCH] Business Analyst @ Sanderson -> 37%
+  [SKIP]  Below threshold
+  [MATCH] Trainee Business Analyst @ ITOL Recruit -> 22%
+  [SKIP]  Below threshold
+  [MATCH] Business Analyst Trainee @ ITOL Recruit -> 22%
+  [SKIP]  Below threshold
+  [BLOCK] Trainee Junior Security Operations Analyst @ Newto Training - irrelevant category
+  [BLOCK] Trainee Information Security Operations Analyst @ Newto Training - irrelevant category
+  [MATCH] QC Analyst @ Adecco  -> 22%
+  [SKIP]  Below threshold
+  [MATCH] Cost Analyst @ Reed -> 45%
+  [SKIP]  Below threshold
+  [MATCH] Recruitment - Candidate Consultant - IT Sector- Glasgow @ Morgan Hunt Recruitment -> 7%
+  [SKIP]  Below threshold
+  [BLOCK] Graduate Sales Executive @ Xact Placements Limited - irrelevant category
+  [BLOCK] School Executive Assistant @ University of the West of Scotland - irrelevant category
+  [BLOCK] Head of Procurement @ University of the West of Scotland - irrelevant category
+  [BLOCK] Graduate Ethical Hacker @ Newto Training - irrelevant category
+  [BLOCK] Trainee Cyber Graduate @ Newto Training - irrelevant category
+  [BLOCK] Trainee Graduate Cybersecurity Analyst @ Newto Training - irrelevant category
+  [BLOCK] Trainee Graduate Security Analyst @ Newto Training - irrelevant category
+  [BLOCK] Trainee Graduate Security Consultant @ Newto Training - irrelevant category
+  [BLOCK] Trainee Cyber Security Graduate @ Newto Training - irrelevant category
+  [BLOCK] Trainee Graduate Analyst, Incident Response @ Newto Training - irrelevant category
+  [BLOCK] Trainee Cyber Security @ IT Career Switch - irrelevant category
+[DONE] Scan complete. Next scan in 20 minutes.
+
+----------------------------------------
+Exception occurred during processing of request from ('172.233.178.66', 52024)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 424, in handle_one_request
+    method()
+  File "/home/ubuntu/jobhunter-pro/dashboard_server.py", line 402, in do_POST
+    p=urlparse(self.path).path;b=self.gb()
+                                 ^^^^^^^^^
+  File "/home/ubuntu/jobhunter-pro/dashboard_server.py", line 385, in gb
+    return json.loads(self.rfile.read(l)) if l else {}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+----------------------------------------
+  [AI] Tailoring CV for: Technical Data Analyst at Barclays
+  [PDF] Generated: tailored_cvs/Technical_Data_Analyst_Barclays.pdf
+----------------------------------------
+Exception occurred during processing of request from ('98.83.86.162', 46360)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 414, in handle_one_request
+    if not self.parse_request():
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/server.py", line 331, in parse_request
+    self.send_error(
+  File "/usr/lib/python3.12/http/server.py", line 491, in send_error
+    self.wfile.write(body)
+  File "/usr/lib/python3.12/socketserver.py", line 840, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('98.83.86.162', 46374)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/http/server.py", line 292, in parse_request
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 414, in handle_one_request
+    if not self.parse_request():
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/server.py", line 309, in parse_request
+    self.send_error(
+  File "/usr/lib/python3.12/http/server.py", line 491, in send_error
+    self.wfile.write(body)
+  File "/usr/lib/python3.12/socketserver.py", line 840, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('98.83.86.162', 46406)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/http/server.py", line 292, in parse_request
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 414, in handle_one_request
+    if not self.parse_request():
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/server.py", line 309, in parse_request
+    self.send_error(
+  File "/usr/lib/python3.12/http/server.py", line 491, in send_error
+    self.wfile.write(body)
+  File "/usr/lib/python3.12/socketserver.py", line 840, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('98.83.86.162', 50108)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/http/server.py", line 292, in parse_request
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 414, in handle_one_request
+    if not self.parse_request():
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/server.py", line 309, in parse_request
+    self.send_error(
+  File "/usr/lib/python3.12/http/server.py", line 491, in send_error
+    self.wfile.write(body)
+  File "/usr/lib/python3.12/socketserver.py", line 840, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('98.83.86.162', 50118)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 414, in handle_one_request
+    if not self.parse_request():
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/server.py", line 323, in parse_request
+    self.send_error(
+  File "/usr/lib/python3.12/http/server.py", line 491, in send_error
+    self.wfile.write(body)
+  File "/usr/lib/python3.12/socketserver.py", line 840, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('98.83.86.162', 50130)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/http/server.py", line 292, in parse_request
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 414, in handle_one_request
+    if not self.parse_request():
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/server.py", line 309, in parse_request
+    self.send_error(
+  File "/usr/lib/python3.12/http/server.py", line 491, in send_error
+    self.wfile.write(body)
+  File "/usr/lib/python3.12/socketserver.py", line 840, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('98.83.86.162', 50138)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/http/server.py", line 292, in parse_request
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 414, in handle_one_request
+    if not self.parse_request():
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/server.py", line 309, in parse_request
+    self.send_error(
+  File "/usr/lib/python3.12/http/server.py", line 491, in send_error
+    self.wfile.write(body)
+  File "/usr/lib/python3.12/socketserver.py", line 840, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('185.93.89.193', 24209)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 707, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('185.93.89.190', 58703)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 419, in handle_one_request
+    self.send_error(
+  File "/usr/lib/python3.12/http/server.py", line 488, in send_error
+    self.end_headers()
+  File "/usr/lib/python3.12/http/server.py", line 538, in end_headers
+    self.flush_headers()
+  File "/usr/lib/python3.12/http/server.py", line 542, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+  File "/usr/lib/python3.12/socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('185.93.89.190', 15591)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 707, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('204.76.203.177', 10793)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 707, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('204.76.203.179', 4925)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 707, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
